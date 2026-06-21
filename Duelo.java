@@ -1,4 +1,3 @@
-
 public class Duelo {
 
     private int numeroDuelo;
@@ -60,11 +59,11 @@ public class Duelo {
 
             }
             if (personajeGanador == personaje1) {
-                personaje1.sumarGanado();
-                personaje2.sumarPerdidos();
+                personaje1.incrementarDuelosGanados();
+                personaje2.incrementarDuelosPerdidos();
             } else {
-                personaje2.sumarGanado();
-                personaje1.sumarPerdidos();
+                personaje2.incrementarDuelosGanados();
+                personaje1.incrementarDuelosPerdidos();
             }
 
             resultado = true;
