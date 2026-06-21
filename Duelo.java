@@ -49,6 +49,14 @@ public class Duelo {
         return estado;
     }
 
+    public int getHora(){
+    return this.hora;
+    }
+
+    public int getDia(){
+    return this.dia;
+    }
+
     public boolean marcarRealizado(Personaje personajeGanador) {
 
         boolean resultado = false;
@@ -60,11 +68,11 @@ public class Duelo {
 
             }
             if (personajeGanador == personaje1) {
-                personaje1.sumarGanado();
-                personaje2.sumarPerdidos();
+                personaje1.incrementarDuelosGanados();
+                personaje2.incrementarDuelosPerdidos();
             } else {
-                personaje2.sumarGanado();
-                personaje1.sumarPerdidos();
+                personaje2.incrementarDuelosGanados();
+                personaje1.incrementarDuelosPerdidos();
             }
 
             resultado = true;
@@ -74,7 +82,7 @@ public class Duelo {
     }
 
     public int calcularPoderTotal() {
-        int total = personaje1.getEnergia() + arma1.getPoderAtaque() + personaje2.getEnergia() + arma2.getPoderAtaque();
+        int total = personaje1.getNivelDeEnergia() + arma1.getPoderAtaque() + personaje2.getNivelDeEnergia() + arma2.getPoderAtaque();
         return total;
     }
 
