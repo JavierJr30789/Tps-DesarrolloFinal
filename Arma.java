@@ -1,19 +1,40 @@
 public class Arma{
-private int poderAtaque;
-private boolean magica;
+    private int Codigo;
+    private String Nombre;
+    private String Tipo;
+    private String Poder;
 
-public Arma(int pAtaque, boolean esmag){
-this.poderAtaque = pAtaque;
-this.magica = esmag;
-}
-
-    public int getPoderAtaque() {
-        return poderAtaque;
+    //Constructores
+    public Arma(int Cod, String Nom, String Tip, String Pod) {
+        this.Codigo = Cod;
+        this.Nombre = Nom;
+        this.Tipo = Tip;
+        this.Poder = Pod;
     }
 
-public boolean esMagica(){
-return this.magica;
-}
+    //Observadores
+    public int getCodigo() { return Codigo; }
+    public String getNombre(){ return Nombre; }
+    public String getTipo(){ return Tipo; }
+    public String getPoder(){ return Poder; }
 
+    //Modificadores
+    public void setCodigo(int Cod){ this.Codigo = Cod; }
+    public void setNombre(String Nom){ this.Nombre = Nom; }
+    public void setTipo(String Tip){ this.Tipo = Tip; }
+    public void setPoder(String Pod){ this.Poder = Pod; }
 
+    //Propias del tipo
+    public String toString() {
+        return "Arma{" +
+                "Codigo=" + Codigo +
+                ", Nombre='" + Nombre + '\'' +
+                ", Tipo='" + Tipo + '\'' +
+                ", Poder='" + Poder + '\'' +
+                '}';
+    }
+
+    public boolean esMagica(){
+        return this.Tipo.equalsIgnoreCase("Mágica");
+    }
 }
