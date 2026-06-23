@@ -1,0 +1,43 @@
+public class Arena {
+    private String Código;
+    private String Nombre;
+    private String Ubicacion;
+    private int CantidadEspec;
+    private String Dificultad;
+
+    //Constructores
+    public Arena(String Cod, String Nom, String Ubi, int CantEspec, String Dif) {
+        this.Código = Cod;
+        this.Nombre = Nom;
+        this.Ubicacion = Ubi;
+        this.CantidadEspec = CantEspec;
+        this.Dificultad = Dif;
+    }
+
+    //Observadores
+    public String getCódigo() { return Código; }
+    public String getNombre() { return Nombre; }
+    public String getUbicacion() { return Ubicacion; }
+    public int getCantidadEspec() { return CantidadEspec; }
+    public String getDificultad() { return Dificultad; }
+
+    //Modificadores
+    public void setCódigo(String Cod) { this.Código = Cod; }
+    public void setNombre(String Nom) { this.Nombre = Nom; }
+    public void setUbicacion(String Ubi) { this.Ubicacion = Ubi; }
+    public void setCantidadEspec(int CantEspec) { this.CantidadEspec = CantEspec; }
+    public void setDificultad(String Dif) { this.Dificultad = Dif; }
+
+    //Propias del tipo
+    public String toString() {
+        return "Arena{" +
+                "Código='" + Código + '\'' +
+                ", Nombre='" + Nombre + '\'' +
+                ", Ubicacion='" + Ubicacion + '\'' +
+                ", CantidadEspec=" + CantidadEspec +
+                ", Dificultad='" + Dificultad + '\'' +
+                '}';
+    }
+
+
+}
