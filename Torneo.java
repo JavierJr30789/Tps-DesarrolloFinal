@@ -262,4 +262,98 @@ private void cargarArmas(String rutaArchivo) throws IOException {
         }
         return encontrada;
     }
+/**
+ * Ordena los duelos de un dia determinado segun su poder total de
+ * combate (de menor a mayor) y guarda el resultado en un archivo
+ * de texto, tal como pide la funcionalidad 6 del enunciado.
+ *
+ * Delega el ordenamiento y el guardado al Cronograma, ya que es
+ * quien tiene acceso directo a la matriz de duelos.
+ *
+ * @param dia Dia a consultar y ordenar.
+ * @param rutaArchivo Ruta/nombre del archivo donde se guarda el resultado.
+ * @return Arreglo de duelos del dia, ya ordenado por poder total.
+ * @throws IOException Si ocurre un problema al escribir el archivo.
+ */
+public Duelo[] guardarDuelosOrdenados(int dia, String rutaArchivo) throws IOException {
+
+    Duelo[] duelosOrdenados = cronograma.ordenarDuelosPorDia(dia);
+
+    cronograma.guardarEnArchivo(duelosOrdenados, rutaArchivo);
+
+    return duelosOrdenados;
+}
+ 
+ /**
+ * Calcula la cantidad total de duelos realizados en todo el cronograma,
+ * utilizando el metodo recursivo del Cronograma.
+ *
+ * @return Cantidad de duelos realizados.
+ */
+public int contarDuelosRealizados() {
+    return cronograma.duelosRealizados(0, 0, 0);
+}
+
+/**
+ * Agrega un nuevo duelo al cronograma, validando todas las reglas
+ * que pide el enunciado antes de crearlo.
+ *
+ * Controla que: el numero no este repetido, los personajes/armas/arena
+ * existan, los personajes sean diferentes, el horario este entre 08 y 22,
+ * el dia/horario este disponible y ninguno de los personajes participe
+ * en otro duelo ese mismo dia.
+ *
+ * @param numero numero del nuevo duelo
+ * @param codP1 codigo del primer personaje
+ * @param codP2 codigo del segundo personaje
+ * @param codA1 codigo del arma del primer personaje
+ * @param codA2 codigo del arma del segundo personaje
+ * @param codArena codigo de la arena
+ * @param dia dia de la semana (0=Lunes ... 6=Domingo)
+ * @param hora hora real (08 a 22 inclusive)
+ * @return true si se pudo agregar, false si alguna validacion fallo
+ */
+public boolean agregarDuelo(int numero, String codP1, String codP2,
+                             String codA1, String codA2, String codArena,
+                             int dia, int hora) {
+
+    boolean resultado = false;
+
+    // 1. Horario dentro del rango permitido
+    if (hora >= 8 && hora <= 22) {
+
+        // 2. Numero de duelo no repetido
+        if (!cronograma.existeDuelo(numero)) {
+
+            Personaje p1 = buscarPersonajePorCodigo(codP1);
+            Personaje p2 = buscarPersonajePorCodigo(codP2);
+            Arma a1 = buscarArmaPorCodigo(codA1);
+            Arma a2 = buscarArmaPorCodigo(codA2);
+            Arena unaArena = buscarArenaPorCodigo(codArena);
+
+            // 3. Personajes, armas y arena existentes
+            if (p1 != null && p2 != null && a1 != null && a2 != null && unaArena != null) {
+
+                // 4. Personajes diferentes
+                if (!p1.getCodigo().equals(p2.getCodigo())) {
+
+                    // 5. Horario disponible
+                    if (cronograma.horarioDisponible(dia, hora)) {
+
+                        // 6. Ninguno de los personajes ocupado ese dia
+                        if (!cronograma.personajeOcupadoEseDia(codP1, dia) &&
+                            !cronograma.personajeOcupadoEseDia(codP2, dia)) {
+
+                            Duelo nuevoDuelo = new Duelo(numero, p1, p2, a1, a2, unaArena, dia, hora,"programado");
+                            resultado = cronograma.agregarDuelo(nuevoDuelo);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return resultado;
+}
+   //final del tda
 }
