@@ -182,7 +182,7 @@ private void cargarArmas(String rutaArchivo) throws IOException {
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(";");
                 //asignamos lo valores encontrados por linea, a variables locales
-                int numero = Integer.parseInt(datos[0]); //codigo del duelo
+                String numero = datos[0]; //codigo del duelo
                 Personaje p1 = buscarPersonajePorCodigo(datos[1]); // primer personaje
                 Personaje p2 = buscarPersonajePorCodigo(datos[2]); // segundo personaje
                 Arma a1 = buscarArmaPorCodigo(datos[3]); //arma del primer personaje
@@ -313,7 +313,7 @@ public int contarDuelosRealizados() {
  * @param hora hora real (08 a 22 inclusive)
  * @return true si se pudo agregar, false si alguna validacion fallo
  */
-public boolean agregarDuelo(int numero, String codP1, String codP2,
+public boolean agregarDuelo(String numero, String codP1, String codP2,
                              String codA1, String codA2, String codArena,
                              int dia, int hora) {
 

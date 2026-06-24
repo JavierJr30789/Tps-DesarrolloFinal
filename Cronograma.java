@@ -66,7 +66,7 @@ public class Cronograma {
      * @param numero Número de duelo.
      * @return true si existe, false en caso contrario.
      */
-    public boolean existeDuelo(int numero) {
+    public boolean existeDuelo(String numero) {
         boolean existe = false;
 
         if (buscarDuelo(numero) != null) {
@@ -102,7 +102,7 @@ public class Cronograma {
      * @param numero Número del duelo.
      * @return El duelo encontrado o null si no existe.
      */
-    public Duelo buscarDuelo(int numero) {
+    public Duelo buscarDuelo(String numero) {
 
         Duelo encontrado = null;
         int dia = 0;
@@ -115,7 +115,7 @@ public class Cronograma {
 
                 if (cronograma[dia][hora] != null) {
 
-                    if (cronograma[dia][hora].getNumDuelo() == numero) {
+                    if (cronograma[dia][hora].getNumDuelo().equals(numero)) {
                         encontrado = cronograma[dia][hora];
                     }
                 }

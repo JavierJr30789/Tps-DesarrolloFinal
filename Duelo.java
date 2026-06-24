@@ -5,7 +5,7 @@ public class Duelo {
     // ==========================
 
     // Número identificador único del duelo.
-    private int numeroDuelo;
+    private String numeroDuelo;
 
     // Participantes del duelo.
     private Personaje personaje1;
@@ -44,7 +44,7 @@ public class Duelo {
      * @param dia Día programado.
      * @param hora Hora programada.
      */
-    public Duelo(int numero, Personaje p1, Personaje p2,Arma a1, Arma a2, Arena arena, int dia, int hora, String programado) {
+    public Duelo(String numero, Personaje p1, Personaje p2,Arma a1, Arma a2, Arena arena, int dia, int hora, String programado) {
 
         this.numeroDuelo = numero;
         this.personaje1 = p1;
@@ -63,7 +63,7 @@ public class Duelo {
     /**
      * Devuelve el número identificador del duelo.
      */
-    public int getNumDuelo() {
+    public String getNumDuelo() {
         return this.numeroDuelo;
     }
     /**
