@@ -21,25 +21,31 @@ public class Menu {
             sc.nextLine();
 
             switch (opcion) {
-                case 1: opcionAgregarPersonaje();
+                case 1:
+                    opcionAgregarPersonaje();
                     break;
-                case 2: 
+                case 2:
                     break;
-                case 3: 
+                case 3:
                     break;
-                case 4: 
+                case 4:
+                    opcionDuelosRealizados();
                     break;
-                case 5: 
+                case 5:
                     break;
                 case 6:
                     break;
                 case 7:
                     break;
                 case 8:
+                    opcionHorariosLibres();
                     break;
                 case 9:
+                    opcionPrimerDueloMagico();
                     break;
                 case 0:
+                    salir = true;
+                    System.out.println("Gracias por usar el sistema!");
                     break;
                 default:
                     break;
@@ -67,7 +73,7 @@ public class Menu {
         System.out.print("Seleccione una opción: ");
     }
 
-    //metodo de la primera opcion para agregar un personaje
+    // metodo de la primera opcion para agregar un personaje
     public void opcionAgregarPersonaje() {
         System.out.print("Ingrese el codigo del personaje: ");
         String codigo = sc.nextLine();
@@ -79,13 +85,13 @@ public class Menu {
         int nivelEnergia = sc.nextInt();
         sc.nextLine();
         System.out.print("Ingrese la cantiadad de duelos ganados del personaje: ");
-        int duelGana = sc.nextInt();
+        int deulGana = sc.nextInt();
         sc.nextLine();
         System.out.print("Ingrese la cantidad de duelos perdidos del personaje: ");
         int duelPer = sc.nextInt();
         sc.nextLine();
 
-        boolean agregado = torneo.agregarPersonaje(codigo, nombre, tipo, nivelEnergia, duelGana, duelPer);
+        boolean agregado = torneo.agregarPersonaje(codigo, nombre, tipo, deulGana, duelPer, duelPer);
 
         if (agregado) {
             System.out.println("Personaje agregado con exito.");
@@ -94,6 +100,54 @@ public class Menu {
         }
     }
 
+    // metodo de la opcion 2 para agregar un duelo
+    public void opcionAgregarDuelo() {
+        System.out.print("Número de duelo: ");
+        int numero = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Código del primer personaje: ");
+        String codPer1 = sc.nextLine();
+        System.out.print("Código del segundo personaje: ");
+        String codPer2 = sc.nextLine();
+        System.out.print("Código del arma del primer personaje: ");
+        String codArm1 = sc.nextLine();
+        System.out.print("Código del arma del segundo personaje: ");
+        String codArm2 = sc.nextLine();
+        System.out.print("Código de la arena: ");
+        String codArena = sc.nextLine();
+        System.out.print("Día (0=Lunes ... 6=Domingo): ");
+        int dia = sc.nextInt();
+        System.out.print("Hora (08 a 22): ");
+        int hora = sc.nextInt();
+        sc.nextLine();
 
+        boolean agregado = torneo.agregarDuelo(numero, codPer1, codPer2, codArm1, codArm2, codArena, dia, hora);
+        if (agregado) {
+            System.out.println("Duelo agregado con exito.");
+        } else {
+            System.out.println("No se pudo agregar el duelo (alguna validación falló).");
+        }
+    }
+
+    // metodo de la opcion 4 que muestra la cantidad de duelos realizados
+    public void opcionDuelosRealizados() {
+        System.out.println("\n==============================");
+        System.out.println("   DUELOS REALIZADOS EN TOTAL ");
+        System.out.println("==============================");
+        System.out.println("Cantidad: " + torneo.contarDuelosRealizados());
+    }
+
+    // metodo de la opcion 8 que muestra la cantidad de horarios libres
+    public void opcionHorariosLibres() {
+        System.out.println("\n==============================");
+        System.out.println("   HORARIOS LIBRES EN LA SEMANA");
+        System.out.println("==============================");
+        System.out.println("Cantidad: " + torneo.contarHorariosLibres());
+    }
+
+    // metodo de la opcion 9 que muestra el primer horario de cada dia con un arma magica
+    public void opcionPrimerDueloMagico() {
+        
+    }
 
 }
