@@ -79,13 +79,13 @@ public class Menu {
         int nivelEnergia = sc.nextInt();
         sc.nextLine();
         System.out.print("Ingrese la cantiadad de duelos ganados del personaje: ");
-        int deulGana = sc.nextInt();
+        int duelGana = sc.nextInt();
         sc.nextLine();
         System.out.print("Ingrese la cantidad de duelos perdidos del personaje: ");
         int duelPer = sc.nextInt();
         sc.nextLine();
 
-        boolean agregado = torneo.agregarPersonaje(codigo, nombre, tipo, deulGana, duelPer, duelPer);
+        boolean agregado = torneo.agregarPersonaje(codigo, nombre, tipo, nivelEnergia, duelGana, duelPer);
 
         if (agregado) {
             System.out.println("Personaje agregado con exito.");
