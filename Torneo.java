@@ -355,5 +355,42 @@ public boolean agregarDuelo(String numero, String codP1, String codP2,
 
     return resultado;
 }
+
+    // verifica si el codigo ya esta usado en otro personaje
+    public boolean existeCodigo(String codigo) {
+        boolean existe = false;
+        int i = 0;
+        while (i < cantPersonajes && !existe) {
+            if (personajes[i].getCodigo().equalsIgnoreCase(codigo)) {
+                existe = true;
+            }
+            i++;
+        }
+
+        return existe;
+    }
+
+    // verifica el formato del codigo
+    public boolean formatoCodigoValido(String codigo) {
+        return codigo.matches("^P\\d{3}$");
+    }
+
+    // metodo para agregar un nuevo personaje
+    public boolean agregarPersonaje(String cod, String nn, String tipo, int nivEner, int dueGa, int duePer) {
+        boolean personajeAgregado = false;
+
+        if (existeCodigo(cod)) {
+            System.out.println("El codigo ingresado ya esta en uso");
+        } else if (!formatoCodigoValido(cod)) {
+            System.out.println("El formato del codigo es ivalido");
+        } else {
+            personajeAgregado = true;
+            Personaje nuevo = new Personaje(cod, nn, tipo, nivEner, dueGa, duePer);
+            personajes[cantPersonajes] = nuevo;
+            cantPersonajes++;
+        }
+
+        return personajeAgregado;
+    }
    //final del tda
 }
