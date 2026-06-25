@@ -12,57 +12,75 @@ public class Menu {
         this.torneo = torneo;
         this.sc = new Scanner(System.in);
     }
+// limpia visualmente la consola
+private void limpiarPantalla() {
+    for (int i = 0; i < 50; i++) {
+        System.out.println();
+    }
+}
 
+// espera que el usuario presione ENTER
+private void pausar() {
+    System.out.println("\nPresione ENTER para volver al menú...");
+    sc.nextLine();
+}
     // bucle del menu
     public void iniciar() {
-        int opcion;
-        boolean salir = false;
+    int opcion;
+    boolean salir = false;
 
-        do {
-            mostrarOpciones();
-            opcion = sc.nextInt();
-            sc.nextLine();
+    do {
+        limpiarPantalla();
+        mostrarOpciones();
 
-            switch (opcion) {
-                case 1:
-                    opcionAgregarPersonaje();
-                    break;
-                case 2:
-                    opcionAgregarDuelo();
-                    break;
-                case 3:
-                    opcionMarcarRealizado();
-                    break;
-                case 4:
-                    opcionDuelosRealizados();
-                    break;
-                case 5:
-                    opcionOrdenarDuelosDelDia();
-                    break;
-                case 6:
-                    opcionMostrarPersonaje();
-                    break;
-                case 7:
-                    opcionDuelosEnRangoDePoder();
-                    break;
-                case 8:
-                    opcionHorariosLibres();
-                    break;
-                case 9:
-                    opcionPrimerDueloMagico();
-                    break;
-                case 0:
-                    salir = true;
-                    System.out.println("Gracias por usar el sistema!");
-                    break;
-                default:
-                    System.out.println("La opcion elegida no es valida");
-                    break;
-            }
+        opcion = sc.nextInt();
+        sc.nextLine();
 
-        } while (!salir);
-    }
+        limpiarPantalla();
 
+        switch (opcion) {
+            case 1:
+                opcionAgregarPersonaje();
+                break;
+            case 2:
+                opcionAgregarDuelo();
+                break;
+            case 3:
+                opcionMarcarRealizado();
+                break;
+            case 4:
+                opcionDuelosRealizados();
+                break;
+            case 5:
+                opcionOrdenarDuelosDelDia();
+                break;
+            case 6:
+                opcionMostrarPersonaje();
+                break;
+            case 7:
+                opcionDuelosEnRangoDePoder();
+                break;
+            case 8:
+                opcionHorariosLibres();
+                break;
+            case 9:
+                opcionPrimerDueloMagico();
+                break;
+            case 0:
+                salir = true;
+                System.out.println("Gracias por usar el sistema!");
+                break;
+            default:
+                System.out.println("La opcion elegida no es valida");
+                break;
+        }
+
+        if (!salir) {
+            pausar();
+        }
+
+    } while (!salir);
+}
     // mostrar opciones
     private void mostrarOpciones() {
         System.out.println("\n=====================================");
