@@ -39,7 +39,8 @@ public class Menu {
                 case 5:
                     opcionOrdenarDuelosDelDia();
                     break;
-                case 6:
+                case 6: 
+                     opcionMostrarDatosPersonaje();
                     break;
                 case 7:
                     break;
@@ -177,8 +178,23 @@ private void opcionOrdenarDuelosDelDia() {
         System.out.println("Error al guardar el archivo: " + e.getMessage());
     }
 }
-    
+    //metodo de la opcion 6 que muestra los datos 
+         public void opcionMostrarDatosPersonaje(){
+        System.out.println("\n==============================");
+        System.out.println("       DATOS DEL PERSONAJE     ");
+        System.out.println("==============================");
+        System.out.println("Ingrese el codigo del personaje: ");
+        String codigo = sc.nextLine();
 
+        if(!torneo.formatoCodigoValido(codigo)) {
+            System.out.println("Error: Formato de codigo invalido");
+        } else if (personaje == null) {
+            System.out.println("Error: Personaje inexistente");
+        } else {
+            Personaje personaje = torneo.obtenerPersonaje(codigo);
+            System.out.println(personaje.toString());
+        }
+    
     // metodo de la opcion 8 que muestra la cantidad de horarios libres
     private void opcionHorariosLibres() {
         System.out.println("\n==============================");
@@ -187,6 +203,7 @@ private void opcionOrdenarDuelosDelDia() {
         System.out.println("Cantidad: " + torneo.contarHorariosLibres());
     }
 
+    }
     // metodo de la opcion 9 que muestra el primer horario de cada dia con un arma magica
     private void opcionPrimerDueloMagico() {
         int[] horarios = torneo.primerDueloConArmaMagica();
