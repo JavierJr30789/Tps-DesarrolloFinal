@@ -54,7 +54,7 @@ public class Duelo {
         this.arena = arena;
         this.dia = dia;
         this.hora = hora;
-        this.estado = "programado";
+        this.estado = programado;
     }
 
     // ==========================

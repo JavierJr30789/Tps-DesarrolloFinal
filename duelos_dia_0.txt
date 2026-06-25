@@ -1,0 +1,13 @@
+Duelo #D005 - Ragnar vs Seraphine - Dia:0 Hora:13 - Estado:programado
+Duelo #D001 - Arthas vs Lyria - Dia:0 Hora:8 - Estado:programado
+Duelo #D009 - Galen vs Freya - Dia:0 Hora:17 - Estado:programado
+Duelo #D008 - Drako vs Ayla - Dia:0 Hora:16 - Estado:programado
+Duelo #D003 - Darian vs Nyx - Dia:0 Hora:10 - Estado:programado
+Duelo #D012 - Korgan vs Nadia - Dia:0 Hora:21 - Estado:programado
+Duelo #D007 - Borin vs Selene - Dia:0 Hora:15 - Estado:programado
+Duelo #D006 - Varek vs Iris - Dia:0 Hora:14 - Estado:programado
+Duelo #D010 - Noctis vs Tara - Dia:0 Hora:18 - Estado:programado
+Duelo #D002 - Kael vs Morgana - Dia:0 Hora:9 - Estado:programado
+Duelo #D013 - Orion vs Zara - Dia:0 Hora:22 - Estado:programado
+Duelo #D011 - Eldric vs Mila - Dia:0 Hora:20 - Estado:programado
+Duelo #D004 - Thorin vs Elara - Dia:0 Hora:11 - Estado:programado

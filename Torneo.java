@@ -44,7 +44,7 @@ public class Torneo {
             cantArenas = 0;
 
             cronograma = new Cronograma();
-
+            
             cargarPersonajes(rutaPersonajes);
             cargarArmas(rutaArmas);
             cargarArenas(rutaArenas);
@@ -91,7 +91,7 @@ public class Torneo {
      * @param rutaArchivo ruta del archivo personajes.txt
      * @throws IOException si el archivo no existe o no se puede leer
      */
-    private void cargarPersonajes(String rutaArchivo) throws IOException {
+    public void cargarPersonajes(String rutaArchivo) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
             while ((linea = br.readLine()) != null) {
@@ -120,7 +120,7 @@ public class Torneo {
      * @param rutaArchivo ruta del archivo armas.txt
      * @throws IOException si el archivo no existe o no se puede leer
      */
-    private void cargarArmas(String rutaArchivo) throws IOException {
+    public void cargarArmas(String rutaArchivo) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
             while ((linea = br.readLine()) != null) {
@@ -146,7 +146,7 @@ public class Torneo {
      * @param rutaArchivo ruta del archivo arenas.txt
      * @throws IOException si el archivo no existe o no se puede leer
      */
-    private void cargarArenas(String rutaArchivo) throws IOException {
+    public void cargarArenas(String rutaArchivo) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
             while ((linea = br.readLine()) != null) {
@@ -166,6 +166,37 @@ public class Torneo {
     }
 
     /**
+ * Convierte el nombre de un dia de la semana (en español, sin tildes)
+ * al indice numerico correspondiente, usado por la matriz del Cronograma.
+ * 0 = Lunes, 1 = Martes, ..., 6 = Domingo.
+ *
+ * @param nombreDia nombre del dia tal como viene en el archivo (ej: "Lunes")
+ * @return indice numerico del dia, o -1 si el nombre no es valido
+ */
+private int convertirDiaAIndice(String nombreDia) {
+
+    int indice = -1;
+
+    if (nombreDia.equalsIgnoreCase("Lunes")) {
+        indice = 0;
+    } else if (nombreDia.equalsIgnoreCase("Martes")) {
+        indice = 1;
+    } else if (nombreDia.equalsIgnoreCase("Miercoles")) {
+        indice = 2;
+    } else if (nombreDia.equalsIgnoreCase("Jueves")) {
+        indice = 3;
+    } else if (nombreDia.equalsIgnoreCase("Viernes")) {
+        indice = 4;
+    } else if (nombreDia.equalsIgnoreCase("Sabado")) {
+        indice = 5;
+    } else if (nombreDia.equalsIgnoreCase("Domingo")) {
+        indice = 6;
+    }
+
+    return indice;
+}
+
+    /**
      * Carga los duelos desde el archivo recibido y los agrega al cronograma. A
      * diferencia de los otros metodos de carga, este no crea entidades nuevas
      * de Personaje, Arma o Arena: busca por codigo las que ya fueron cargadas
@@ -175,7 +206,7 @@ public class Torneo {
      * @param rutaArchivo ruta del archivo duelos.txt
      * @throws IOException si el archivo no existe o no se puede leer
      */
-    private void cargarDuelos(String rutaArchivo) throws IOException {
+    public void cargarDuelos(String rutaArchivo) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
             while ((linea = br.readLine()) != null) {
@@ -187,7 +218,7 @@ public class Torneo {
                 Arma a1 = buscarArmaPorCodigo(datos[3]); //arma del primer personaje
                 Arma a2 = buscarArmaPorCodigo(datos[4]); //arma del segundo personaje
                 Arena unaArena = buscarArenaPorCodigo(datos[5]); // arena del duelo
-                int dia = Integer.parseInt(datos[6]); //dia del duelo
+                int dia = convertirDiaAIndice(datos[6]);
                 int hora = Integer.parseInt(datos[7]); //horario del duelo
                 String estado = datos[8];// "programado" o "realizado"
 
@@ -392,6 +423,25 @@ public class Torneo {
         return resultado;
     }
 
+
+/**
+ * Aumenta el tamaño del arreglo de personajes en una cantidad fija,
+ * copiando todos los elementos existentes al arreglo nuevo.
+ * Se usa cuando el arreglo actual ya esta completamente lleno y
+ * se necesita agregar un personaje mas.
+ */
+private void agrandarArregloPersonajes() {
+
+    int nuevoTamaño = personajes.length + 10;   // margen de crecimiento, ajustable
+    Personaje[] nuevoArreglo = new Personaje[nuevoTamaño];
+
+    for (int i = 0; i < personajes.length; i++) {
+        nuevoArreglo[i] = personajes[i];
+    }
+
+    personajes = nuevoArreglo;
+}
+
     // verifica si el codigo ya esta usado en otro personaje
     public boolean existeCodigo(String codigo) {
         boolean existe = false;
@@ -407,27 +457,30 @@ public class Torneo {
     }
 
     // verifica el formato del codigo
-    public boolean formatoCodigoValido(String codigo) {
+    public static boolean formatoCodigoValido(String codigo) {
         return codigo.matches("^P\\d{3}$");
     }
 
     // metodo para agregar un nuevo personaje
-    public boolean agregarPersonaje(String cod, String nn, String tipo, int nivEner, int dueGa, int duePer) {
-        boolean personajeAgregado = false;
+    public boolean agregarPersonaje(String codigo, String nombre, String tipo, int energia) {
 
-        if (existeCodigo(cod)) {
-            System.out.println("El codigo ingresado ya esta en uso");
-        } else if (!formatoCodigoValido(cod)) {
-            System.out.println("El formato del codigo es ivalido");
-        } else {
-            personajeAgregado = true;
-            Personaje nuevo = new Personaje(cod, nn, tipo, nivEner, dueGa, duePer);
-            personajes[cantPersonajes] = nuevo;
-            cantPersonajes++;
+    boolean resultado = false;
+
+    if (Torneo.formatoCodigoValido(codigo) && buscarPersonajePorCodigo(codigo) == null) {
+
+        // Si el arreglo esta lleno, lo agrandamos antes de insertar
+        if (cantPersonajes == personajes.length) {
+            agrandarArregloPersonajes();
         }
 
-        return personajeAgregado;
+        Personaje nuevoPersonaje = new Personaje(codigo, nombre, tipo, energia, 0, 0);
+        personajes[cantPersonajes] = nuevoPersonaje;
+        cantPersonajes++;
+        resultado = true;
     }
+
+    return resultado;
+}
 
     /**
      * Calcula la cantidad de horarios libres en toda la semana, utilizando el
@@ -443,6 +496,10 @@ public class Torneo {
 //retorna el arreglo con los horarios del primer duelo con arma magica de cada dia
     public int[] primerDueloConArmaMagica() {
         return cronograma.primerDueloConArmaMagica();
+    }
+
+     public Duelo[] obtenerDuelosEnRangoDePoder(int poderMin, int poderMax) {
+        return cronograma.duelosEnRangoDePoder(poderMin, poderMax);
     }
     //final del tda
 }

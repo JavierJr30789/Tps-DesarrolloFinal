@@ -129,6 +129,8 @@ public class Cronograma {
         return encontrado;
     }
 
+
+
     /**
      * Verifica si un personaje participa en algún duelo de un día específico.
      *

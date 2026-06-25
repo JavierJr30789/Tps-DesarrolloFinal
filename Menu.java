@@ -39,10 +39,11 @@ public class Menu {
                 case 5:
                     opcionOrdenarDuelosDelDia();
                     break;
-                case 6: 
-                     opcionMostrarDatosPersonaje();
+                case 6:
+                    opcionMostrarPersonaje();
                     break;
                 case 7:
+                    opcionDuelosEnRangoDePoder();
                     break;
                 case 8:
                     opcionHorariosLibres();
@@ -91,14 +92,9 @@ public class Menu {
         System.out.print("Ingrese el nivel de energia del personaje: ");
         int nivelEnergia = sc.nextInt();
         sc.nextLine();
-        System.out.print("Ingrese la cantiadad de duelos ganados del personaje: ");
-        int deulGana = sc.nextInt();
-        sc.nextLine();
-        System.out.print("Ingrese la cantidad de duelos perdidos del personaje: ");
-        int duelPer = sc.nextInt();
-        sc.nextLine();
+     
 
-        boolean agregado = torneo.agregarPersonaje(codigo, nombre, tipo, nivelEnergia, deulGana, duelPer);
+        boolean agregado = torneo.agregarPersonaje(codigo, nombre, tipo, nivelEnergia);
 
         if (agregado) {
             System.out.println("Personaje agregado con exito.");
@@ -111,7 +107,6 @@ public class Menu {
     private void opcionAgregarDuelo() {
         System.out.print("Número de duelo: ");
         String numero = sc.nextLine();
-        sc.nextLine();
         System.out.print("Código del primer personaje: ");
         String codPer1 = sc.nextLine();
         System.out.print("Código del segundo personaje: ");
@@ -136,6 +131,7 @@ public class Menu {
         }
     }
 
+//metodo de la opcion 3 que maraca un duelo como realizado
     private void opcionMarcarRealizado() {
         System.out.println("Numero de duelo: ");
         String numero = sc.nextLine();
@@ -178,22 +174,42 @@ private void opcionOrdenarDuelosDelDia() {
         System.out.println("Error al guardar el archivo: " + e.getMessage());
     }
 }
-    //metodo de la opcion 6 que muestra los datos 
-         public void opcionMostrarDatosPersonaje(){
-        System.out.println("\n==============================");
-        System.out.println("       DATOS DEL PERSONAJE     ");
-        System.out.println("==============================");
-        System.out.println("Ingrese el codigo del personaje: ");
-        String codigo = sc.nextLine();
-
-        if(!torneo.formatoCodigoValido(codigo)) {
-            System.out.println("Error: Formato de codigo invalido");
-        } else if (personaje == null) {
-            System.out.println("Error: Personaje inexistente");
+    
+    //metodo para la opcion 6 que muestra el personaje ingresado por consola
+    public void opcionMostrarPersonaje() {
+    System.out.print("Ingrese el código del personaje: ");
+    String codigo = sc.nextLine();
+    if(!torneo.formatoCodigoValido(codigo)) {
+        System.out.println("Error: El formato del código es inválido");
+    } else {
+        Personaje personaje = torneo.buscarPersonajePorCodigo(codigo);
+        if(personaje == null) {
+            System.out.println("Error: No existe un personaje con ese código");
         } else {
-            Personaje personaje = torneo.obtenerPersonaje(codigo);
             System.out.println(personaje.toString());
         }
+    }
+}
+
+        //metodo para la opcion 7 que muestra los duelos en un rango de poder
+    public void opcionDuelosEnRangoDePoder() {
+        System.out.print("Ingrese el poder minimo: ");
+        int poderMin = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Ingrese el poder maximo: ");
+        int poderMax = sc.nextInt();
+        sc.nextLine();
+
+        Duelo[] duelosEnRango = torneo.obtenerDuelosEnRangoDePoder(poderMin, poderMax);
+
+        if (duelosEnRango.length == 0) {
+            System.out.println("No se encontraron duelos en ese rango");
+        } else {
+            for (int i=0; i<duelosEnRango.length; i++) {
+                System.out.println(duelosEnRango[i].toString());
+            }
+        }
+    }
     
     // metodo de la opcion 8 que muestra la cantidad de horarios libres
     private void opcionHorariosLibres() {
@@ -203,7 +219,6 @@ private void opcionOrdenarDuelosDelDia() {
         System.out.println("Cantidad: " + torneo.contarHorariosLibres());
     }
 
-    }
     // metodo de la opcion 9 que muestra el primer horario de cada dia con un arma magica
     private void opcionPrimerDueloMagico() {
         int[] horarios = torneo.primerDueloConArmaMagica();
