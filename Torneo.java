@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader; //abre el archivo.
 import java.io.FileReader; //lee el contenido de forma eficiente.
 import java.io.IOException;// captura cualquier error que ocurra durante la lectura.
@@ -16,19 +17,19 @@ public class Torneo {
     private Cronograma cronograma;
 
     public Torneo(String rutaPersonajes, String rutaArmas, String rutaArenas, String rutaDuelos) {
-    /**
-     * Constructor del Torneo.
-     * Cuenta las lineas de cada archivo para crear los arreglos del tamaño exacto,
-     * inicializa el cronograma y carga todos los datos (personajes, armas, arenas
-     * y duelos) desde los archivos recibidos.
-     * Si ocurre un error de lectura en cualquiera de los archivos, se atrapa la
-     * excepcion y se informa por consola, dejando el torneo sin terminar de inicializar.
-     *
-     * @param rutaPersonajes ruta del archivo personajes.txt
-     * @param rutaArmas      ruta del archivo armas.txt
-     * @param rutaArenas     ruta del archivo arenas.txt
-     * @param rutaDuelos     ruta del archivo duelos.txt
-     */
+        /**
+         * Constructor del Torneo. Cuenta las lineas de cada archivo para crear
+         * los arreglos del tamaño exacto, inicializa el cronograma y carga
+         * todos los datos (personajes, armas, arenas y duelos) desde los
+         * archivos recibidos. Si ocurre un error de lectura en cualquiera de
+         * los archivos, se atrapa la excepcion y se informa por consola,
+         * dejando el torneo sin terminar de inicializar.
+         *
+         * @param rutaPersonajes ruta del archivo personajes.txt
+         * @param rutaArmas ruta del archivo armas.txt
+         * @param rutaArenas ruta del archivo arenas.txt
+         * @param rutaDuelos ruta del archivo duelos.txt
+         */
         try {
             int cantLineasPersonajes = contarLineas(rutaPersonajes);
             personajes = new Personaje[cantLineasPersonajes];
@@ -54,11 +55,11 @@ public class Torneo {
         }
     }
 
-/**
-     * Cuenta la cantidad de lineas de un archivo de texto.
-     * Se usa antes de cargar los datos para saber el tamaño exacto que debe
-     * tener el arreglo correspondiente (personajes, armas o arenas), evitando
-     * crear arreglos mas grandes de lo necesario.
+    /**
+     * Cuenta la cantidad de lineas de un archivo de texto. Se usa antes de
+     * cargar los datos para saber el tamaño exacto que debe tener el arreglo
+     * correspondiente (personajes, armas o arenas), evitando crear arreglos mas
+     * grandes de lo necesario.
      *
      * @param rutaArchivo ruta del archivo a contar
      * @return cantidad de lineas que tiene el archivo
@@ -67,14 +68,13 @@ public class Torneo {
     private int contarLineas(String rutaArchivo) throws IOException {
         int cantidad = 0;
         try (
-        /*Se guarda en la variable br para leer líneas completas.*/
-        BufferedReader br = 
-        /*El BufferedReader envuelve al FileReader para leer de forma más eficiente.*/
-        new BufferedReader(
-        /*Busca el archivo cuya ruta está en rutaArchivo.Crea un objeto para leerlo.*/
-        new FileReader(rutaArchivo))) {
+                /*Se guarda en la variable br para leer líneas completas.*/
+                BufferedReader br
+                = /*El BufferedReader envuelve al FileReader para leer de forma más eficiente.*/ new BufferedReader(
+                        /*Busca el archivo cuya ruta está en rutaArchivo.Crea un objeto para leerlo.*/
+                        new FileReader(rutaArchivo))) {
 
-        /*lee una línea del archivo. en cada iteracion */
+            /*lee una línea del archivo. en cada iteracion */
             while (br.readLine() != null) {
                 cantidad++;
             }
@@ -82,28 +82,28 @@ public class Torneo {
         return cantidad;
     }
 
-      /**
+    /**
      * Carga los personajes desde el archivo recibido y los almacena en el
-     * arreglo personajes. Cada linea del archivo representa un personaje completo,
-     * con sus datos separados por ";". No valida los datos, se asume que son correctos.
+     * arreglo personajes. Cada linea del archivo representa un personaje
+     * completo, con sus datos separados por ";". No valida los datos, se asume
+     * que son correctos.
      *
      * @param rutaArchivo ruta del archivo personajes.txt
      * @throws IOException si el archivo no existe o no se puede leer
      */
-
     private void cargarPersonajes(String rutaArchivo) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(";");
-           Personaje nuevoPersonaje = new Personaje(
-              datos[0],                      // codigo
-              datos[1],                      // nombre
-              datos[2],                      // tipo
-              Integer.parseInt(datos[3]),    // nivelDeEnergia
-              Integer.parseInt(datos[4]),    // cantDuelosGanados
-              Integer.parseInt(datos[5])     // cantDuelosPerdidos
-);
+                Personaje nuevoPersonaje = new Personaje(
+                        datos[0], // codigo
+                        datos[1], // nombre
+                        datos[2], // tipo
+                        Integer.parseInt(datos[3]), // nivelDeEnergia
+                        Integer.parseInt(datos[4]), // cantDuelosGanados
+                        Integer.parseInt(datos[5]) // cantDuelosPerdidos
+                );
 
                 //guarda el objeto del personaje en el arreglo
                 personajes[cantPersonajes] = nuevoPersonaje;
@@ -112,25 +112,25 @@ public class Torneo {
         }
     }
 
-/**
-     * Carga las armas desde el archivo recibido y las almacena en el arreglo armas.
-     * Cada linea del archivo representa un arma completa, con sus datos separados
-     * por ";". No valida los datos, se asume que son correctos.
+    /**
+     * Carga las armas desde el archivo recibido y las almacena en el arreglo
+     * armas. Cada linea del archivo representa un arma completa, con sus datos
+     * separados por ";". No valida los datos, se asume que son correctos.
      *
      * @param rutaArchivo ruta del archivo armas.txt
      * @throws IOException si el archivo no existe o no se puede leer
      */
-private void cargarArmas(String rutaArchivo) throws IOException {
+    private void cargarArmas(String rutaArchivo) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(";");
                 Arma nuevaArma = new Arma(
-                datos[0], //codigo de arma
-                datos[1], //nombre del arma
-                datos[2], //tipo del arma
-                Integer.parseInt(datos[3]), //nivel de poder
-                Boolean.parseBoolean(datos[4])); // es magica o no
+                        datos[0], //codigo de arma
+                        datos[1], //nombre del arma
+                        datos[2], //tipo del arma
+                        Integer.parseInt(datos[3]), //nivel de poder
+                        Boolean.parseBoolean(datos[4])); // es magica o no
                 // guarda el objeto arma dentro del arreglo
                 armas[cantArmas] = nuevaArma;
                 cantArmas++;//aumenta el tamaño del arreglo
@@ -138,10 +138,10 @@ private void cargarArmas(String rutaArchivo) throws IOException {
         }
     }
 
- /**
-     * Carga las arenas desde el archivo recibido y las almacena en el arreglo arenas.
-     * Cada linea del archivo representa una arena completa, con sus datos separados
-     * por ";". No valida los datos, se asume que son correctos.
+    /**
+     * Carga las arenas desde el archivo recibido y las almacena en el arreglo
+     * arenas. Cada linea del archivo representa una arena completa, con sus
+     * datos separados por ";". No valida los datos, se asume que son correctos.
      *
      * @param rutaArchivo ruta del archivo arenas.txt
      * @throws IOException si el archivo no existe o no se puede leer
@@ -152,11 +152,11 @@ private void cargarArmas(String rutaArchivo) throws IOException {
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(";");
                 Arena nuevaArena = new Arena(
-                datos[0], //codigo de la arena
-                datos[1], //nombre de la arena
-                datos[2], // Ubicacion de la arena
-                Integer.parseInt(datos[3]), //Cantidad de espectadores
-                Integer.parseInt(datos[4])); //dificultad de la arena
+                        datos[0], //codigo de la arena
+                        datos[1], //nombre de la arena
+                        datos[2], // Ubicacion de la arena
+                        Integer.parseInt(datos[3]), //Cantidad de espectadores
+                        Integer.parseInt(datos[4])); //dificultad de la arena
 
                 //guarda el objeto en el arreglo
                 arenas[cantArenas] = nuevaArena;
@@ -165,13 +165,12 @@ private void cargarArmas(String rutaArchivo) throws IOException {
         }
     }
 
-
-   /**
-     * Carga los duelos desde el archivo recibido y los agrega al cronograma.
-     * A diferencia de los otros metodos de carga, este no crea entidades nuevas
+    /**
+     * Carga los duelos desde el archivo recibido y los agrega al cronograma. A
+     * diferencia de los otros metodos de carga, este no crea entidades nuevas
      * de Personaje, Arma o Arena: busca por codigo las que ya fueron cargadas
-     * previamente (por eso debe ejecutarse despues de cargarPersonajes, cargarArmas
-     * y cargarArenas) y con esas referencias construye cada Duelo.
+     * previamente (por eso debe ejecutarse despues de cargarPersonajes,
+     * cargarArmas y cargarArenas) y con esas referencias construye cada Duelo.
      *
      * @param rutaArchivo ruta del archivo duelos.txt
      * @throws IOException si el archivo no existe o no se puede leer
@@ -201,40 +200,42 @@ private void cargarArmas(String rutaArchivo) throws IOException {
         }
     }
 
-/**
- * Marca un duelo como realizado, indicando el codigo del personaje ganador.
- *
- * Busca el duelo por numero y el personaje por codigo, y delega en
- * Duelo.marcarRealizado(...) el resto de las validaciones (que el duelo
- * este programado, que el ganador sea uno de los dos participantes,
- * y la actualizacion de estadisticas).
- *
- * @param numero numero del duelo a marcar
- * @param codigoGanador codigo del personaje ganador
- * @return true si se pudo marcar correctamente, false si el duelo no
- *         existe, el personaje no existe, ya estaba realizado, o el
- *         ganador indicado no participa en ese duelo
- */
-public boolean marcarDueloRealizado(String numero, String codigoGanador) {
+    /**
+     * Marca un duelo como realizado, indicando el codigo del personaje ganador.
+     *
+     * Busca el duelo por numero y el personaje por codigo, y delega en
+     * Duelo.marcarRealizado(...) el resto de las validaciones (que el duelo
+     * este programado, que el ganador sea uno de los dos participantes, y la
+     * actualizacion de estadisticas).
+     *
+     * @param numero numero del duelo a marcar
+     * @param codigoGanador codigo del personaje ganador
+     * @return true si se pudo marcar correctamente, false si el duelo no
+     * existe, el personaje no existe, ya estaba realizado, o el ganador
+     * indicado no participa en ese duelo
+     */
+    public boolean marcarDueloRealizado(String numero, String codigoGanador) {
 
-    boolean resultado = false;
+        boolean resultado = false;
 
-    Duelo duelo = cronograma.buscarDuelo(numero);
-    Personaje ganador = buscarPersonajePorCodigo(codigoGanador);
+        Duelo duelo = cronograma.buscarDuelo(numero);
+        Personaje ganador = buscarPersonajePorCodigo(codigoGanador);
 
-    if (duelo != null && ganador != null) {
-        resultado = duelo.marcarRealizado(ganador);
+        if (duelo != null && ganador != null) {
+            resultado = duelo.marcarRealizado(ganador);
+        }
+
+        return resultado;
     }
 
-    return resultado;
-}
-  /**
-     * Busca un personaje dentro del arreglo personajes segun su codigo.
-     * Recorre el arreglo hasta encontrarlo o hasta llegar al final de los
-     * elementos cargados (cantPersonajes).
+    /**
+     * Busca un personaje dentro del arreglo personajes segun su codigo. Recorre
+     * el arreglo hasta encontrarlo o hasta llegar al final de los elementos
+     * cargados (cantPersonajes).
      *
      * @param codigo codigo del personaje a buscar
-     * @return el Personaje encontrado, o null si no existe ninguno con ese codigo
+     * @return el Personaje encontrado, o null si no existe ninguno con ese
+     * codigo
      */
     public Personaje buscarPersonajePorCodigo(String codigo) {
         Personaje encontrado = null;
@@ -248,10 +249,10 @@ public boolean marcarDueloRealizado(String numero, String codigoGanador) {
         return encontrado;
     }
 
-   /**
-     * Busca un arma dentro del arreglo armas segun su codigo.
-     * Recorre el arreglo hasta encontrarla o hasta llegar al final de los
-     * elementos cargados (cantArmas).
+    /**
+     * Busca un arma dentro del arreglo armas segun su codigo. Recorre el
+     * arreglo hasta encontrarla o hasta llegar al final de los elementos
+     * cargados (cantArmas).
      *
      * @param codigo codigo del arma a buscar
      * @return el Arma encontrada, o null si no existe ninguna con ese codigo
@@ -268,11 +269,10 @@ public boolean marcarDueloRealizado(String numero, String codigoGanador) {
         return encontrada;
     }
 
-
-/**
-     * Busca una arena dentro del arreglo arenas segun su codigo.
-     * Recorre el arreglo hasta encontrarla o hasta llegar al final de los
-     * elementos cargados (cantArenas).
+    /**
+     * Busca una arena dentro del arreglo arenas segun su codigo. Recorre el
+     * arreglo hasta encontrarla o hasta llegar al final de los elementos
+     * cargados (cantArenas).
      *
      * @param codigo codigo de la arena a buscar
      * @return la Arena encontrada, o null si no existe ninguna con ese codigo
@@ -288,99 +288,109 @@ public boolean marcarDueloRealizado(String numero, String codigoGanador) {
         }
         return encontrada;
     }
-/**
- * Ordena los duelos de un dia determinado segun su poder total de
- * combate (de menor a mayor) y guarda el resultado en un archivo
- * de texto, tal como pide la funcionalidad 6 del enunciado.
- *
- * Delega el ordenamiento y el guardado al Cronograma, ya que es
- * quien tiene acceso directo a la matriz de duelos.
- *
- * @param dia Dia a consultar y ordenar.
- * @param rutaArchivo Ruta/nombre del archivo donde se guarda el resultado.
- * @return Arreglo de duelos del dia, ya ordenado por poder total.
- * @throws IOException Si ocurre un problema al escribir el archivo.
- */
-public Duelo[] guardarDuelosOrdenados(int dia, String rutaArchivo) throws IOException {
 
-    Duelo[] duelosOrdenados = cronograma.ordenarDuelosPorDia(dia);
+    /**
+     * Ordena los duelos de un dia determinado segun su poder total de combate
+     * (de menor a mayor) y guarda el resultado en un archivo de texto, tal como
+     * pide la funcionalidad 6 del enunciado.
+     *
+     * Delega el ordenamiento y el guardado al Cronograma, ya que es quien tiene
+     * acceso directo a la matriz de duelos.
+     *
+     * @param dia Dia a consultar y ordenar.
+     * @param rutaArchivo Ruta/nombre del archivo donde se guarda el resultado.
+     * @return Arreglo de duelos del dia, ya ordenado por poder total.
+     * @throws IOException Si ocurre un problema al escribir el archivo.
+     */
+    public Duelo[] guardarDuelosOrdenados(int dia, String rutaArchivo) throws IOException {
 
-    cronograma.guardarEnArchivo(duelosOrdenados, rutaArchivo);
+        Duelo[] duelosOrdenados = cronograma.ordenarDuelosPorDia(dia);
 
-    return duelosOrdenados;
-}
- 
- /**
- * Calcula la cantidad total de duelos realizados en todo el cronograma,
- * utilizando el metodo recursivo del Cronograma.
- *
- * @return Cantidad de duelos realizados.
- */
-public int contarDuelosRealizados() {
-    return cronograma.duelosRealizados(0, 0, 0);
-}
+        cronograma.guardarEnArchivo(duelosOrdenados, rutaArchivo);
 
-/**
- * Agrega un nuevo duelo al cronograma, validando todas las reglas
- * que pide el enunciado antes de crearlo.
- *
- * Controla que: el numero no este repetido, los personajes/armas/arena
- * existan, los personajes sean diferentes, el horario este entre 08 y 22,
- * el dia/horario este disponible y ninguno de los personajes participe
- * en otro duelo ese mismo dia.
- *
- * @param numero numero del nuevo duelo
- * @param codP1 codigo del primer personaje
- * @param codP2 codigo del segundo personaje
- * @param codA1 codigo del arma del primer personaje
- * @param codA2 codigo del arma del segundo personaje
- * @param codArena codigo de la arena
- * @param dia dia de la semana (0=Lunes ... 6=Domingo)
- * @param hora hora real (08 a 22 inclusive)
- * @return true si se pudo agregar, false si alguna validacion fallo
- */
-public boolean agregarDuelo(String numero, String codP1, String codP2,
-                             String codA1, String codA2, String codArena,
-                             int dia, int hora) {
+        return duelosOrdenados;
+    }
 
-    boolean resultado = false;
+    public Duelo[] ordenarDuelosDelDia(int dia) {
+        Duelo[] duelosOrdenados = cronograma.ordenarDuelosPorDia(dia);
+        return duelosOrdenados;
+    }
 
-    // 1. Horario dentro del rango permitido
-    if (hora >= 8 && hora <= 22) {
+    /**
+     * Calcula la cantidad total de duelos realizados en todo el cronograma,
+     * utilizando el metodo recursivo del Cronograma.
+     *
+     * @return Cantidad de duelos realizados.
+     */
+    public int contarDuelosRealizados() {
+        return cronograma.duelosRealizados(0, 0, 0);
+    }
 
-        // 2. Numero de duelo no repetido
-        if (!cronograma.existeDuelo(numero)) {
+    /**
+     * Agrega un nuevo duelo al cronograma, validando todas las reglas que pide
+     * el enunciado antes de crearlo.
+     *
+     * Controla que: el numero no este repetido, los personajes/armas/arena
+     * existan, los personajes sean diferentes, el horario este entre 08 y 22,
+     * el dia/horario este disponible y ninguno de los personajes participe en
+     * otro duelo ese mismo dia.
+     *
+     * @param numero numero del nuevo duelo
+     * @param codP1 codigo del primer personaje
+     * @param codP2 codigo del segundo personaje
+     * @param codA1 codigo del arma del primer personaje
+     * @param codA2 codigo del arma del segundo personaje
+     * @param codArena codigo de la arena
+     * @param dia dia de la semana (0=Lunes ... 6=Domingo)
+     * @param hora hora real (08 a 22 inclusive)
+     * @return true si se pudo agregar, false si alguna validacion fallo
+     */
+    public boolean agregarDuelo(String numero, String codP1, String codP2,
+            String codA1, String codA2, String codArena,
+            int dia, int hora) {
 
-            Personaje p1 = buscarPersonajePorCodigo(codP1);
-            Personaje p2 = buscarPersonajePorCodigo(codP2);
-            Arma a1 = buscarArmaPorCodigo(codA1);
-            Arma a2 = buscarArmaPorCodigo(codA2);
-            Arena unaArena = buscarArenaPorCodigo(codArena);
+        boolean resultado = false;
 
-            // 3. Personajes, armas y arena existentes
-            if (p1 != null && p2 != null && a1 != null && a2 != null && unaArena != null) {
+        // 1. Formato del numero de duelo
+        if (cronograma.formatoNumeroValido(numero)) {
 
-                // 4. Personajes diferentes
-                if (!p1.getCodigo().equals(p2.getCodigo())) {
+            // 2. Horario dentro del rango permitido
+            if (hora >= 8 && hora <= 22) {
 
-                    // 5. Horario disponible
-                    if (cronograma.horarioDisponible(dia, hora)) {
+                // 3. Numero de duelo no repetido
+                if (!cronograma.existeDuelo(numero)) {
 
-                        // 6. Ninguno de los personajes ocupado ese dia
-                        if (!cronograma.personajeOcupadoEseDia(codP1, dia) &&
-                            !cronograma.personajeOcupadoEseDia(codP2, dia)) {
+                    Personaje p1 = buscarPersonajePorCodigo(codP1);
+                    Personaje p2 = buscarPersonajePorCodigo(codP2);
+                    Arma a1 = buscarArmaPorCodigo(codA1);
+                    Arma a2 = buscarArmaPorCodigo(codA2);
+                    Arena unaArena = buscarArenaPorCodigo(codArena);
 
-                            Duelo nuevoDuelo = new Duelo(numero, p1, p2, a1, a2, unaArena, dia, hora,"programado");
-                            resultado = cronograma.agregarDuelo(nuevoDuelo);
+                    // 4. Personajes, armas y arena existentes
+                    if (p1 != null && p2 != null && a1 != null && a2 != null && unaArena != null) {
+
+                        // 5. Personajes diferentes
+                        if (!p1.getCodigo().equals(p2.getCodigo())) {
+
+                            // 6. Horario disponible
+                            if (cronograma.horarioDisponible(dia, hora)) {
+
+                                // 7. Ninguno de los personajes ocupado ese dia
+                                if (!cronograma.personajeOcupadoEseDia(codP1, dia)
+                                        && !cronograma.personajeOcupadoEseDia(codP2, dia)) {
+
+                                    Duelo nuevoDuelo = new Duelo(numero, p1, p2, a1, a2, unaArena, dia, hora, "programado");
+                                    resultado = cronograma.agregarDuelo(nuevoDuelo);
+                                }
+                            }
                         }
                     }
                 }
             }
         }
-    }
 
-    return resultado;
-}
+        return resultado;
+    }
 
     // verifica si el codigo ya esta usado en otro personaje
     public boolean existeCodigo(String codigo) {
@@ -419,19 +429,20 @@ public boolean agregarDuelo(String numero, String codP1, String codP2,
         return personajeAgregado;
     }
 
-/**
- * Calcula la cantidad de horarios libres en toda la semana,
- * utilizando el metodo recursivo del Cronograma.
- *
- * @return Cantidad de horarios libres (sin duelos programados ni realizados).
- */
-public int contarHorariosLibres() {
-    return cronograma.cantidadHorariosLibres(0, 0, 0);
-}
+    /**
+     * Calcula la cantidad de horarios libres en toda la semana, utilizando el
+     * metodo recursivo del Cronograma.
+     *
+     * @return Cantidad de horarios libres (sin duelos programados ni
+     * realizados).
+     */
+    public int contarHorariosLibres() {
+        return cronograma.cantidadHorariosLibres(0, 0, 0);
+    }
 
 //retorna el arreglo con los horarios del primer duelo con arma magica de cada dia
-public int[] primerDueloConArmaMagica() {
-    return cronograma.primerDueloConArmaMagica();
-}
-   //final del tda
+    public int[] primerDueloConArmaMagica() {
+        return cronograma.primerDueloConArmaMagica();
+    }
+    //final del tda
 }

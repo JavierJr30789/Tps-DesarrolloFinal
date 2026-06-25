@@ -452,6 +452,29 @@ public Duelo[] duelosEnRangoDePoder(int poderMin, int poderMax){
  return duelosEnRango;
 }
 
+// verifica si el numero de duelo ya esta usado en otro duelo
+public boolean existeNumero(String numero) {
+    boolean existe = false;
+    int dia = 0;
+    while (dia < cantDias && !existe) {
+        int hora = 0;
+        while (hora < cantHorarios && !existe) {
+            if (cronograma[dia][hora] != null &&
+                cronograma[dia][hora].getNumDuelo().equalsIgnoreCase(numero)) {
+                existe = true;
+            }
+            hora++;
+        }
+        dia++;
+    }
+    return existe;
+}
+
+// verifica el formato del numero de duelo: "D" seguido de 3 numeros
+public boolean formatoNumeroValido(String numero) {
+    return numero.matches("^D\\d{3}$");
+}
+
 public int cantDuelosEnRangoDePoder(int poderMin, int poderMax){
 //inicializamos acumulador en 0
 int cantDuelos = 0;

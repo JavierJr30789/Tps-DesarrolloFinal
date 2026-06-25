@@ -1,6 +1,9 @@
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
+
     private Torneo torneo;
     private Scanner sc;
 
@@ -25,6 +28,7 @@ public class Menu {
                     opcionAgregarPersonaje();
                     break;
                 case 2:
+                    opcionAgregarDuelo();
                     break;
                 case 3:
                     opcionMarcarRealizado();
@@ -33,6 +37,7 @@ public class Menu {
                     opcionDuelosRealizados();
                     break;
                 case 5:
+                    opcionOrdenarDuelosDelDia();
                     break;
                 case 6:
                     break;
@@ -75,7 +80,7 @@ public class Menu {
     }
 
     // metodo de la primera opcion para agregar un personaje
-    public void opcionAgregarPersonaje() {
+    private void opcionAgregarPersonaje() {
         System.out.print("Ingrese el codigo del personaje: ");
         String codigo = sc.nextLine();
         System.out.print("Ingrese el nombre del personaje: ");
@@ -102,7 +107,7 @@ public class Menu {
     }
 
     // metodo de la opcion 2 para agregar un duelo
-    public void opcionAgregarDuelo() {
+    private void opcionAgregarDuelo() {
         System.out.print("Número de duelo: ");
         String numero = sc.nextLine();
         sc.nextLine();
@@ -131,28 +136,51 @@ public class Menu {
     }
 
     private void opcionMarcarRealizado() {
-    System.out.println("Numero de duelo: ");
-    String numero = sc.nextLine();
-    System.out.println("Codigo del personaje ganador: ");
-    String codGanador = sc.nextLine();
+        System.out.println("Numero de duelo: ");
+        String numero = sc.nextLine();
+        System.out.println("Codigo del personaje ganador: ");
+        String codGanador = sc.nextLine();
 
-    if (torneo.marcarDueloRealizado(numero, codGanador)) {
-        System.out.println("Duelo marcado como realizado");
-    } else {
-        System.out.println("Error: duelo inexistente, personaje inexistente, ya realizado, o ganador invalido");
+        if (torneo.marcarDueloRealizado(numero, codGanador)) {
+            System.out.println("Duelo marcado como realizado");
+        } else {
+            System.out.println("Error: duelo inexistente, personaje inexistente, ya realizado, o ganador invalido");
+        }
     }
-}
 
     // metodo de la opcion 4 que muestra la cantidad de duelos realizados
-    public void opcionDuelosRealizados() {
+    private void opcionDuelosRealizados() {
         System.out.println("\n==============================");
         System.out.println("   DUELOS REALIZADOS EN TOTAL ");
         System.out.println("==============================");
         System.out.println("Cantidad: " + torneo.contarDuelosRealizados());
     }
 
+    //metodo de la opcion 5 que genera un archivo txt con todos los duelos guardados en orden de mayor a menor segun su el nivel de poder total
+private void opcionOrdenarDuelosDelDia() {
+    System.out.println("Dia (0=Lunes...6=Domingo): ");
+    int dia = sc.nextInt();
+
+    try {
+        Duelo[] duelos = torneo.guardarDuelosOrdenados(dia, "duelos_dia_" + dia + ".txt");
+
+        if (duelos.length == 0) {
+            System.out.println("No hay duelos programados ese dia");
+        } else {
+            for (int i = 0; i < duelos.length-1 ; i++) {
+                System.out.println(duelos[i].toString() + " - Poder: " + duelos[i].calcularPoderTotal());
+            }
+            System.out.println("Resultado guardado en archivo");
+        }
+ 
+    } catch (IOException e) {
+        System.out.println("Error al guardar el archivo: " + e.getMessage());
+    }
+}
+    
+
     // metodo de la opcion 8 que muestra la cantidad de horarios libres
-    public void opcionHorariosLibres() {
+    private void opcionHorariosLibres() {
         System.out.println("\n==============================");
         System.out.println("   HORARIOS LIBRES EN LA SEMANA");
         System.out.println("==============================");
@@ -160,18 +188,18 @@ public class Menu {
     }
 
     // metodo de la opcion 9 que muestra el primer horario de cada dia con un arma magica
-    public void opcionPrimerDueloMagico() {
+    private void opcionPrimerDueloMagico() {
         int[] horarios = torneo.primerDueloConArmaMagica();
-        
+
         System.out.println("\n==============================");
         System.out.println(" PRIMER DUELO CON ARMA MÁGICA ");
         System.out.println("==============================");
 
-        for (int i=0; i<horarios.length; i++) {
-            if (horarios[i]==-1) {
-                System.out.println("dia "+(i+1)+": No hubo ningun duelo con arma magica este dia");
+        for (int i = 0; i < horarios.length; i++) {
+            if (horarios[i] == -1) {
+                System.out.println("dia " + (i + 1) + ": No hubo ningun duelo con arma magica este dia");
             } else {
-                System.out.println("Dia "+(i+1)+": El primer duelo donde se uso un arma magica fue en el horario: "+horarios[i]);
+                System.out.println("Dia " + (i + 1) + ": El primer duelo donde se uso un arma magica fue en el horario: " + horarios[i]);
             }
         }
     }
