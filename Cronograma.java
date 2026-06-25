@@ -83,16 +83,24 @@ public class Cronograma {
      * @param hora Hora a consultar.
      * @return true si está libre, false si ya hay un duelo.
      */
-    public boolean horarioDisponible(int dia, int hora) {
-        boolean disponible = false;
-        int indice = horaIndice(hora);
+ public boolean horarioDisponible(int dia, int hora) {
+    boolean disponible;
+    int indice = horaIndice(hora);
 
+    if (dia < 0 || dia >= cronograma.length) {
+        disponible = false;
+    } else if (indice < 0 || indice >= cronograma[0].length) {
+        disponible = false;
+    } else {
         if (cronograma[dia][indice] == null) {
             disponible = true;
+        } else {
+            disponible = false;
         }
-
-        return disponible;
     }
+    return disponible;
+}
+   
 
     /**
      * Busca un duelo por su número.
