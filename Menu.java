@@ -56,6 +56,7 @@ public class Menu {
                     System.out.println("Gracias por usar el sistema!");
                     break;
                 default:
+                    System.out.println("La opcion elegida no es valida");
                     break;
             }
 
