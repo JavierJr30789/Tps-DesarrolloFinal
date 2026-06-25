@@ -392,5 +392,16 @@ public boolean agregarDuelo(String numero, String codP1, String codP2,
 
         return personajeAgregado;
     }
+
+/**
+ * Calcula la cantidad de horarios libres en toda la semana,
+ * utilizando el metodo recursivo del Cronograma.
+ *
+ * @return Cantidad de horarios libres (sin duelos programados ni realizados).
+ */
+public int contarHorariosLibres() {
+    return cronograma.cantidadHorariosLibres(0, 0, 0);
+}
+
    //final del tda
 }

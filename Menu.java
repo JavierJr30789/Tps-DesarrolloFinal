@@ -91,7 +91,7 @@ public class Menu {
         int duelPer = sc.nextInt();
         sc.nextLine();
 
-        boolean agregado = torneo.agregarPersonaje(codigo, nombre, tipo, deulGana, duelPer, duelPer);
+        boolean agregado = torneo.agregarPersonaje(codigo, nombre, tipo, nivelEnergia, deulGana, duelPer);
 
         if (agregado) {
             System.out.println("Personaje agregado con exito.");
@@ -103,7 +103,7 @@ public class Menu {
     // metodo de la opcion 2 para agregar un duelo
     public void opcionAgregarDuelo() {
         System.out.print("Número de duelo: ");
-        int numero = sc.nextInt();
+        String numero = sc.nextLine();
         sc.nextLine();
         System.out.print("Código del primer personaje: ");
         String codPer1 = sc.nextLine();
