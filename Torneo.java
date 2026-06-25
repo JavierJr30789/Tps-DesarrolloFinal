@@ -444,5 +444,9 @@ public class Torneo {
     public int[] primerDueloConArmaMagica() {
         return cronograma.primerDueloConArmaMagica();
     }
+
+    public Duelo[] obtenerDuelosEnRangoDePoder(int poderMin, int poderMax) {
+        return cronograma.duelosEnRangoDePoder(poderMin, poderMax);
+    }
     //final del tda
 }
