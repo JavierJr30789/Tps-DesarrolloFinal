@@ -403,5 +403,9 @@ public int contarHorariosLibres() {
     return cronograma.cantidadHorariosLibres(0, 0, 0);
 }
 
+//retorna el arreglo con los horarios del primer duelo con arma magica de cada dia
+public int[] primerDueloConArmaMagica() {
+    return cronograma.primerDueloConArmaMagica();
+}
    //final del tda
 }
