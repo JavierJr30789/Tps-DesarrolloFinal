@@ -40,9 +40,10 @@ public class Menu {
                     opcionOrdenarDuelosDelDia();
                     break;
                 case 6: 
-                     opcionMostrarDatosPersonaje();
+                    opcionMostrarDatosPersonaje();
                     break;
                 case 7:
+                    opcionDuelosEnRangoDePoder();
                     break;
                 case 8:
                     opcionHorariosLibres();
@@ -194,6 +195,28 @@ private void opcionOrdenarDuelosDelDia() {
             Personaje personaje = torneo.obtenerPersonaje(codigo);
             System.out.println(personaje.toString());
         }
+    }
+
+        //metodo para la opcion 7 que muestra los duelos en un rango de poder
+    public void opcionDuelosEnRangoDePoder() {
+        System.out.print("Ingrese el poder minimo: ");
+        int poderMin = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Ingrese el poder maximo: ");
+        int poderMax = sc.nextInt();
+        sc.nextLine();
+
+        Duelo[] duelosEnRango = torneo.obtenerDuelosEnRangoDePoder(poderMin, poderMax);
+
+        if (duelosEnRango.length == 0) {
+            System.out.println("No se encontraron duelos en ese rango");
+        } else {
+            for (int i=0; i<duelosEnRango.length; i++) {
+                System.out.println(duelosEnRango[i].toString());
+            }
+        }
+    }
+    
     
     // metodo de la opcion 8 que muestra la cantidad de horarios libres
     private void opcionHorariosLibres() {
