@@ -147,7 +147,19 @@ public class Menu {
 
     // metodo de la opcion 9 que muestra el primer horario de cada dia con un arma magica
     public void opcionPrimerDueloMagico() {
+        int[] horarios = torneo.primerDueloConArmaMagica();
         
+        System.out.println("\n==============================");
+        System.out.println(" PRIMER DUELO CON ARMA MÁGICA ");
+        System.out.println("==============================");
+
+        for (int i=0; i<horarios.length; i++) {
+            if (horarios[i]==-1) {
+                System.out.println("dia "+(i+1)+": No hubo ningun duelo con arma magica este dia");
+            } else {
+                System.out.println("Dia "+(i+1)+": El primer duelo donde se uso un arma magica fue en el horario: "+horarios[i]);
+            }
+        }
     }
 
 }
