@@ -27,6 +27,7 @@ public class Menu {
                 case 2:
                     break;
                 case 3:
+                    opcionMarcarRealizado();
                     break;
                 case 4:
                     opcionDuelosRealizados();
@@ -128,6 +129,19 @@ public class Menu {
             System.out.println("No se pudo agregar el duelo (alguna validación falló).");
         }
     }
+
+    private void opcionMarcarRealizado() {
+    System.out.println("Numero de duelo: ");
+    String numero = sc.nextLine();
+    System.out.println("Codigo del personaje ganador: ");
+    String codGanador = sc.nextLine();
+
+    if (torneo.marcarDueloRealizado(numero, codGanador)) {
+        System.out.println("Duelo marcado como realizado");
+    } else {
+        System.out.println("Error: duelo inexistente, personaje inexistente, ya realizado, o ganador invalido");
+    }
+}
 
     // metodo de la opcion 4 que muestra la cantidad de duelos realizados
     public void opcionDuelosRealizados() {

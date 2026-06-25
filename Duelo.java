@@ -128,36 +128,33 @@ public class Duelo {
      */
     public boolean marcarRealizado(Personaje personajeGanador) {
 
-        boolean resultado = false;
+    boolean resultado = false;
 
-        // Solo puede realizarse si estaba programado.
-        if (estado.equalsIgnoreCase("programado")) {
+    // Solo puede realizarse si estaba programado.
+    if (estado.equalsIgnoreCase("programado")) {
 
-            // Verifica que el ganador sea uno de los participantes.
-            if (personajeGanador == personaje1 || personajeGanador == personaje2) {
+        // Verifica que el ganador sea uno de los participantes.
+        if (personajeGanador == personaje1 || personajeGanador == personaje2) {
 
-                ganador = personajeGanador;
-                estado = "realizado";
-            }
+            ganador = personajeGanador;
+            estado = "realizado";
 
-            // Actualiza estadísticas.
+            // Actualiza estadisticas.
             if (personajeGanador == personaje1) {
-
                 personaje1.incrementarDuelosGanados();
                 personaje2.incrementarDuelosPerdidos();
-
-            } else {if (personajeGanador == personaje2){
-
+            } else {
                 personaje2.incrementarDuelosGanados();
                 personaje1.incrementarDuelosPerdidos();
-                }
             }
 
             resultado = true;
         }
-
-        return resultado;
     }
+
+    return resultado;
+}
+    
     /**
      * Calcula el poder total del duelo.
      *

@@ -201,7 +201,33 @@ private void cargarArmas(String rutaArchivo) throws IOException {
         }
     }
 
+/**
+ * Marca un duelo como realizado, indicando el codigo del personaje ganador.
+ *
+ * Busca el duelo por numero y el personaje por codigo, y delega en
+ * Duelo.marcarRealizado(...) el resto de las validaciones (que el duelo
+ * este programado, que el ganador sea uno de los dos participantes,
+ * y la actualizacion de estadisticas).
+ *
+ * @param numero numero del duelo a marcar
+ * @param codigoGanador codigo del personaje ganador
+ * @return true si se pudo marcar correctamente, false si el duelo no
+ *         existe, el personaje no existe, ya estaba realizado, o el
+ *         ganador indicado no participa en ese duelo
+ */
+public boolean marcarDueloRealizado(String numero, String codigoGanador) {
 
+    boolean resultado = false;
+
+    Duelo duelo = cronograma.buscarDuelo(numero);
+    Personaje ganador = buscarPersonajePorCodigo(codigoGanador);
+
+    if (duelo != null && ganador != null) {
+        resultado = duelo.marcarRealizado(ganador);
+    }
+
+    return resultado;
+}
   /**
      * Busca un personaje dentro del arreglo personajes segun su codigo.
      * Recorre el arreglo hasta encontrarlo o hasta llegar al final de los
