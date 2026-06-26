@@ -28,10 +28,10 @@ private void pausar() {
     public void iniciar() {
     int opcion;
     boolean salir = false;
-
+ 
     do {
         limpiarPantalla();
-
+mostrarOpciones();
     while (true) {
     //el usuario ingresa cualquier valor, sea string o int lo pasamos como un string, en la variable entrada
         String entrada = sc.nextLine();
