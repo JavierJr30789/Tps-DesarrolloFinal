@@ -31,10 +31,21 @@ private void pausar() {
 
     do {
         limpiarPantalla();
-        mostrarOpciones();
 
-        opcion = sc.nextInt();
-        sc.nextLine();
+    while (true) {
+    //el usuario ingresa cualquier valor, sea string o int lo pasamos como un string, en la variable entrada
+        String entrada = sc.nextLine();
+// intenta transformar a entero el valor de entrada
+        try {
+            opcion = Integer.parseInt(entrada);
+            break;
+
+            // si el valor que intentamos transformar no puede ser convertido a entero, "atrapa" el error de java NumberFormat exeption
+        } catch (NumberFormatException e) {
+        // no sale del sistema y sigue preguntando hasta que el usuario ingrese una opcion valida
+            System.out.print("Debe ingresar un número entre 0 y 9. Intente nuevamente: ");
+        }
+    }
 
         limpiarPantalla();
 
